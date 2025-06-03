@@ -1,4 +1,3 @@
-
 import unittest
 from algorithm import run_algorithm
 

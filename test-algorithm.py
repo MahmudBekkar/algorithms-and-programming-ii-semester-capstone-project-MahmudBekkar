@@ -1,21 +1,19 @@
 import unittest
-from algorithm import run_algorithm
+import numpy as np
+from algorithm import SimpleNeuralNetwork
 
-class TestAlgorithm(unittest.TestCase):
-    def test_basic_case(self):
-        input_data = [1, 2, 3, 4, 5]
-        expected_output = [/* your expected output here */]
-        self.assertEqual(run_algorithm(input_data), expected_output)
+class TestNN(unittest.TestCase):
+    def test_forward_shape(self):
+        nn = SimpleNeuralNetwork(2, 4, 1)
+        X = np.array([[0, 1]])
+        output = nn.forward(X)
+        self.assertEqual(output.shape, (1, 1))
 
-    def test_empty_input(self):
-        input_data = []
-        expected_output = []
-        self.assertEqual(run_algorithm(input_data), expected_output)
+    def test_output_range(self):
+        nn = SimpleNeuralNetwork(2, 4, 1)
+        X = np.array([[1, 1]])
+        output = nn.forward(X)
+        self.assertTrue((output >= 0).all() and (output <= 1).all())
 
-    def test_single_element(self):
-        input_data = [10]
-        expected_output = [/* expected output for single element */]
-        self.assertEqual(run_algorithm(input_data), expected_output)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

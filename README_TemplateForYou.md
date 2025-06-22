@@ -57,7 +57,7 @@ for epoch in 1 to max_epochs:
 
 ## Screenshots
 
-![Main Interface](docs/screenshots/main_interface.png)
+![Main Interface]("E:\PRO\screenshots\main_interface..png")
 *Caption describing the main interface*
 
 ![Algorithm in Action](docs/screenshots/algorithm_demo.png)

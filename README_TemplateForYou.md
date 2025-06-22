@@ -1,4 +1,4 @@
-# [Your Algorithm Name] - Interactive Visualization
+# Neural Network Visualization - Interactive Visualization
 
 ## Project Overview
 
@@ -18,35 +18,42 @@ This project is an interactive web application that implements and visualizes [A
 
 ### Algorithm Steps
 
-1. [Step 1 with explanation]
-2. [Step 2 with explanation]
-3. [Step 3 with explanation]
-...
+1 Initialize weights and biases with small random values.
+2 Perform forward propagation to compute the predicted outputs.
+3 Calculate the error by comparing predicted outputs with true labels.
+4 Backpropagate the error to update weights and biases.
+5 Repeat steps 2-4 for a set number of epochs or until convergence.
 
 ### Pseudocode
 
 ```
-[Include pseudocode representation of your algorithm]
+initialize weights W1, W2 and biases b1, b2
+for epoch in 1 to max_epochs:
+    output = forward_propagation(input)
+    error = target - output
+    update weights and biases using backpropagation
+
 ```
 
 ## Complexity Analysis
 
 ### Time Complexity
 
-- **Best Case:** O(...) - [Explanation]
-- **Average Case:** O(...) - [Explanation]
-- **Worst Case:** O(...) - [Explanation]
+- **Best Case:** O(n * m) - [where n is the number of data points and m is the number of neurons - minimal iterations required]
+- **Average Case:** O(n * m * epochs) - [average training requires multiple epochs]
+- **Worst Case:** O(n * m * epochs) - [maximum epochs needed for convergence]
 
 ### Space Complexity
 
-- O(...) - [Explanation]
+- O(m) - [memory for storing weights, biases, and activations]
 
 ## Features
 
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-...
+-Interactive user input for training data and parameters.
+-Visualization of forward propagation steps.
+-Step-by-step explanation of weight updates during training.
+
+
 
 ## Screenshots
 
@@ -67,8 +74,9 @@ This project is an interactive web application that implements and visualizes [A
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
+   git clone https://github.com/MahmudBekkar/your-repository.git
    cd your-repository
+
    ```
 
 2. Create a virtual environment:
@@ -80,6 +88,7 @@ This project is an interactive web application that implements and visualizes [A
    # On macOS/Linux
    python3 -m venv venv
    source venv/bin/activate
+
    ```
 
 3. Install dependencies:
@@ -94,16 +103,19 @@ This project is an interactive web application that implements and visualizes [A
 
 ## Usage Guide
 
-1. [Step 1 of using the application]
-2. [Step 2 of using the application]
-3. [Step 3 of using the application]
-...
+1 Input training data points and labels.
+2 Set the number of epochs and learning rate.
+3 Click "Train" to start visualization.
+4 Observe forward propagation and weight updates step-by-step.
 
 ### Example Inputs
 
-- [Example 1 with expected output]
-- [Example 2 with expected output]
-- [Example 3 with expected output]
+Points: [(0,0), (0,1), (1,0), (1,1)]
+Labels: [0, 1, 1, 0]
+Epochs: 1000
+Learning Rate: 0.1
+
+
 
 ## Implementation Details
 
@@ -137,9 +149,9 @@ python -m unittest test_algorithm.py
 
 ### Test Cases
 
-- [Test case 1 description]
-- [Test case 2 description]
-- [Test case 3 description]
+-Test with XOR dataset for classification correctness.
+-Test edge cases with empty inputs.
+-Test parameter validation for learning rate and epochs
 
 ## Live Demo
 
@@ -149,35 +161,39 @@ A live demo of this application is available at: [Insert Streamlit Cloud URL her
 
 ### Current Limitations
 
-- [Limitation 1]
-- [Limitation 2]
-- [Limitation 3]
+-Limited to small datasets due to visualization complexity.
+-Only supports binary classification.
+-No support for advanced optimizers or deep networks.
 
 ### Planned Improvements
 
-- [Improvement 1]
-- [Improvement 2]
-- [Improvement 3]
+-Support for multi-class classification.
+-Add more activation functions.
+-Enhance UI for better interactivity.
+
+
 
 ## References and Resources
 
 ### Academic References
 
-1. [Reference 1]
-2. [Reference 2]
-3. [Reference 3]
+1 Ian Goodfellow, Yoshua Bengio, Aaron Courville. Deep Learning. MIT Press, 2016.
+2 Michael Nielsen. Neural Networks and Deep Learning, 2015.
+3 Christopher M. Bishop. Pattern Recognition and Machine Learning, 2006.
 
 ### Online Resources
 
-- [Resource 1]
-- [Resource 2]
-- [Resource 3]
+-Streamlit Documentation
+-Neural Network Tutorial
+-VisuAlgo Neural Network Visualization
+
+
 
 ## Author
 
-- **Name:** [Your Name]
-- **Student ID:** [Your Student ID]
-- **GitHub:** [Your GitHub Username]
+- **Name:** [Mahmud Bekkar]
+- **Student ID:** [220543602]
+- **GitHub:** [MahmudBekkar]
 
 ## Acknowledgements
 

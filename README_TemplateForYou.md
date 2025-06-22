@@ -57,8 +57,8 @@ for epoch in 1 to max_epochs:
 
 ## Screenshots
 
-![Main Interface]("E:\PRO\screenshots\main_interface..png")
-*Caption describing the main interface*
+![Main Interface](E:\PRO\screenshots\main_interface..png)
+*This screenshot shows the initial interface of the neural network visualization app.*
 
 ![Algorithm in Action](docs/screenshots/algorithm_demo.png)
 *Caption describing the algorithm in action*

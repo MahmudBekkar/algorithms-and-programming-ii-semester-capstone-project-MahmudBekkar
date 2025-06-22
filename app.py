@@ -1,31 +1,28 @@
 import streamlit as st
 import numpy as np
-from algorithm import SimpleNeuralNetwork
 import matplotlib.pyplot as plt
+from algorithm import SimpleNeuralNetwork
+from utils import generate_data
 
-st.title("Neural Network Visualization (XOR)")
+st.title("🧠 Neural Network Visualizer")
 
-# XOR input must be 2 features
-input_size = 2
-hidden_size = st.slider("Hidden Neurons", 2, 10, 4)
-output_size = st.slider("Output Neurons", 1, 3, 1)
-epochs = st.slider("Training Epochs", 10, 500, 100)
-lr = st.slider("Learning Rate", 0.01, 1.0, 0.1)
+st.sidebar.header("Training Settings")
+hidden_size = st.sidebar.slider("Hidden layer size", 1, 20, 5)
+learning_rate = st.sidebar.slider("Learning rate", 0.01, 1.0, 0.1)
+epochs = st.sidebar.slider("Epochs", 10, 1000, 100)
 
-# XOR dataset
-X = np.array([[0,0],[0,1],[1,0],[1,1]])
-y = np.array([[0],[1],[1],[0]])
+X_train, X_test, y_train, y_test = generate_data()
 
-nn = SimpleNeuralNetwork(input_size, hidden_size, output_size, learning_rate=lr)
+nn = SimpleNeuralNetwork(input_size=2, hidden_size=hidden_size, output_size=1, learning_rate=learning_rate)
+nn.train(X_train, y_train, epochs=epochs)
 
-losses = []
-for epoch in range(epochs):
-    output = nn.forward(X)
-    loss = np.mean((y - output)**2)
-    losses.append(loss)
-    nn.backward(X, y)
+y_pred = nn.predict(X_test)
+y_pred_class = (y_pred > 0.5).astype(int)
 
-st.line_chart(losses)
-st.write("Final Output:")
-st.write(output)
+accuracy = np.mean(y_pred_class == y_test)
+st.write(f"### Test Accuracy: {accuracy * 100:.2f}%")
 
+fig, ax = plt.subplots()
+scatter = ax.scatter(X_test[:, 0], X_test[:, 1], c=y_pred_class.reshape(-1), cmap="coolwarm", s=20)
+ax.set_title("Test Predictions")
+st.pyplot(fig)

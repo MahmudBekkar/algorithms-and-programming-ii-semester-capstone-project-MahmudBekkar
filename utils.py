@@ -1,11 +1,10 @@
-import matplotlib.pyplot as plt
-import streamlit as st
+from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
-def plot_loss_curve(losses):
-    fig, ax = plt.subplots()
-    ax.plot(losses)
-    ax.set_title("Loss over Epochs")
-    ax.set_xlabel("Epoch")
-    ax.set_ylabel("Loss")
-    st.pyplot(fig)
-
+def generate_data():
+    X, y = make_moons(n_samples=500, noise=0.2, random_state=42)
+    y = y.reshape(-1, 1)
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    return train_test_split(X_scaled, y, test_size=0.2, random_state=42)

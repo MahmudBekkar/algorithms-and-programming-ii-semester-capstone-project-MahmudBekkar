@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-This project is an interactive web application that implements and visualizes [Algorithm Name], developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department.
+This project is an interactive web application that implements and visualizes Neural Network Training, developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department. The tool allows users to input data, configure parameters, and observe the forward propagation and weight updates in a basic neural network.
 
 ## Algorithm Description
 
-[Provide a comprehensive explanation of your algorithm here. Include the following elements:]
+The goal of this project is to visually demonstrate how a simple feedforward neural network can learn to classify input data. It helps beginners understand how inputs are processed, how weights are updated through training, and how predictions are improved.
 
 ### Problem Definition
 
@@ -18,20 +18,24 @@ This project is an interactive web application that implements and visualizes [A
 
 ### Algorithm Steps
 
-1 Initialize weights and biases with small random values.
-2 Perform forward propagation to compute the predicted outputs.
-3 Calculate the error by comparing predicted outputs with true labels.
-4 Backpropagate the error to update weights and biases.
-5 Repeat steps 2-4 for a set number of epochs or until convergence.
+1 Initialize weights and biases randomly.
+2 For each training example, compute the output via forward propagation.
+3 Calculate the loss between predicted and actual output.
+4 Update weights and biases using backpropagation.
+5 Repeat for a set number of epochs or until convergence.
+
 
 ### Pseudocode
 
 ```
-initialize weights W1, W2 and biases b1, b2
-for epoch in 1 to max_epochs:
-    output = forward_propagation(input)
-    error = target - output
-    update weights and biases using backpropagation
+initialize weights and biases
+for epoch in range(max_epochs):
+    for input, target in dataset:
+        prediction = forward_propagation(input)
+        loss = compute_loss(prediction, target)
+        gradients = backpropagate(prediction, target)
+        update weights and biases
+
 
 ```
 
@@ -39,19 +43,20 @@ for epoch in 1 to max_epochs:
 
 ### Time Complexity
 
-- **Best Case:** O(n * m) - [where n is the number of data points and m is the number of neurons - minimal iterations required]
+- **Best Case:** O(n * m) - minimal training steps
 - **Average Case:** O(n * m * epochs) - [average training requires multiple epochs]
 - **Worst Case:** O(n * m * epochs) - [maximum epochs needed for convergence]
 
 ### Space Complexity
 
-- O(m) - [memory for storing weights, biases, and activations]
+- O(m) - memory needed for weights, activations, and gradients
 
 ## Features
 
--Interactive user input for training data and parameters.
--Visualization of forward propagation steps.
--Step-by-step explanation of weight updates during training.
+-Interactive parameter input (learning rate, epochs, etc.)
+-Real-time visualization of training steps
+-Display of prediction accuracy and loss
+-Easy-to-understand graphical feedback
 
 
 
@@ -103,17 +108,18 @@ for epoch in 1 to max_epochs:
 
 ## Usage Guide
 
-1 Input training data points and labels.
-2 Set the number of epochs and learning rate.
-3 Click "Train" to start visualization.
-4 Observe forward propagation and weight updates step-by-step.
+1 Launch the Streamlit app.
+2 Input your dataset points and labels.
+3 Choose training parameters: learning rate, epochs, etc.
+4 Click the Train button.
+5 Observe training progress and output.
 
 ### Example Inputs
 
-Points: [(0,0), (0,1), (1,0), (1,1)]
-Labels: [0, 1, 1, 0]
+Inputs: [(0, 0), (0, 1), (1, 0), (1, 1)]
+Labels: [0, 1, 1, 0] (XOR)
 Epochs: 1000
-Learning Rate: 0.1
+Learning rate: 0.1
 
 
 
@@ -129,14 +135,15 @@ Learning Rate: 0.1
 ### Code Highlights
 
 ```python
-# Include a few key code snippets that demonstrate the most important parts of your implementation
-def key_function(parameter):
-    """
-    Docstring explaining what this function does
-    """
-    # Implementation with comments explaining the logic
-    result = process(parameter)
-    return result
+def forward_propagation(x):
+    z = np.dot(W, x) + b
+    a = sigmoid(z)
+    return a
+
+def backpropagation(x, y):
+    # Gradient calculation
+    ...
+
 ```
 
 ## Testing
@@ -149,9 +156,9 @@ python -m unittest test_algorithm.py
 
 ### Test Cases
 
--Test with XOR dataset for classification correctness.
--Test edge cases with empty inputs.
--Test parameter validation for learning rate and epochs
+-XOR classification test
+-Learning rate bounds test
+-Empty dataset edge case test
 
 ## Live Demo
 
@@ -161,15 +168,16 @@ A live demo of this application is available at: [Insert Streamlit Cloud URL her
 
 ### Current Limitations
 
--Limited to small datasets due to visualization complexity.
--Only supports binary classification.
--No support for advanced optimizers or deep networks.
+-Only supports 2D binary classification
+-No UI for saving models
+-Only basic sigmoid activation.
 
 ### Planned Improvements
 
--Support for multi-class classification.
--Add more activation functions.
--Enhance UI for better interactivity.
+-Support for multi-class classification
+-Add dropout/regularization support
+-Add ReLU and tanh activation options
+-Improve visualization UI with animation
 
 
 
@@ -177,16 +185,17 @@ A live demo of this application is available at: [Insert Streamlit Cloud URL her
 
 ### Academic References
 
-1 Ian Goodfellow, Yoshua Bengio, Aaron Courville. Deep Learning. MIT Press, 2016.
-2 Michael Nielsen. Neural Networks and Deep Learning, 2015.
-3 Christopher M. Bishop. Pattern Recognition and Machine Learning, 2006.
+1 Ian Goodfellow, Yoshua Bengio, Aaron Courville — Deep Learning
+2 Michael Nielsen — Neural Networks and Deep Learning
+3 C. M. Bishop — Pattern Recognition and Machine Learning
+
+
 
 ### Online Resources
 
 -Streamlit Documentation
--Neural Network Tutorial
--VisuAlgo Neural Network Visualization
-
+-VisuAlgo - Neural Networks
+-[Neural Network Tutorials - GeeksforGeeks, Towards Data Science]
 
 
 ## Author

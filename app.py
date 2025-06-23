@@ -1,28 +1,52 @@
 import streamlit as st
 import numpy as np
+from algorithm import NeuralNetwork
+from utils import get_xor_data
 import matplotlib.pyplot as plt
-from algorithm import SimpleNeuralNetwork
-from utils import generate_data
 
-st.title("🧠 Neural Network Visualizer")
+st.set_page_config(page_title="Neural Network Visualization", layout="centered")
 
-st.sidebar.header("Training Settings")
-hidden_size = st.sidebar.slider("Hidden layer size", 1, 20, 5)
-learning_rate = st.sidebar.slider("Learning rate", 0.01, 1.0, 0.1)
-epochs = st.sidebar.slider("Epochs", 10, 1000, 100)
+st.title("Neural Network Visualization - XOR Problem")
 
-X_train, X_test, y_train, y_test = generate_data()
+# Sidebar for inputs
+st.sidebar.header("Training Parameters")
+epochs = st.sidebar.slider("Epochs", min_value=100, max_value=5000, value=1000, step=100)
+learning_rate = st.sidebar.slider("Learning Rate", min_value=0.01, max_value=1.0, value=0.1, step=0.01)
+hidden_neurons = st.sidebar.slider("Hidden Layer Neurons", min_value=1, max_value=10, value=2)
 
-nn = SimpleNeuralNetwork(input_size=2, hidden_size=hidden_size, output_size=1, learning_rate=learning_rate)
-nn.train(X_train, y_train, epochs=epochs)
+# Load XOR dataset
+X, y = get_xor_data()
 
-y_pred = nn.predict(X_test)
-y_pred_class = (y_pred > 0.5).astype(int)
+# Display input data
+st.write("### XOR Dataset Inputs")
+st.write(X)
+st.write("### Labels")
+st.write(y)
 
-accuracy = np.mean(y_pred_class == y_test)
-st.write(f"### Test Accuracy: {accuracy * 100:.2f}%")
-
-fig, ax = plt.subplots()
-scatter = ax.scatter(X_test[:, 0], X_test[:, 1], c=y_pred_class.reshape(-1), cmap="coolwarm", s=20)
-ax.set_title("Test Predictions")
-st.pyplot(fig)
+if st.button("Train Network"):
+    nn = NeuralNetwork(input_size=2, hidden_size=hidden_neurons, output_size=1, learning_rate=learning_rate)
+    losses = nn.train(X, y, epochs=epochs)
+    
+    # Plot loss curve
+    fig, ax = plt.subplots()
+    ax.plot(losses)
+    ax.set_title("Training Loss Over Epochs")
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Loss")
+    st.pyplot(fig)
+    
+    # Display predictions
+    predictions = nn.predict(X)
+    st.write("### Predictions on XOR Inputs")
+    st.write(predictions)
+    
+    # Display final weights and biases
+    st.write("### Final Weights and Biases")
+    st.write("Weights 1 (Input to Hidden):")
+    st.write(nn.W1)
+    st.write("Biases 1:")
+    st.write(nn.b1)
+    st.write("Weights 2 (Hidden to Output):")
+    st.write(nn.W2)
+    st.write("Biases 2:")
+    st.write(nn.b2)
